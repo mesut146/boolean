@@ -75,32 +75,42 @@ a=new nand(a,b);
 }
 
   final public func unary() throws ParseException {func a;
+  boolean not=false;
+    if (jj_2_9(3)) {
+      jj_consume_token(30);
+not=true;
+    } else {
+      ;
+    }
     a = element();
-    if (jj_2_11(3)) {
-      if (jj_2_9(3)) {
-        jj_consume_token(30);
-      } else if (jj_2_10(3)) {
+    if (jj_2_12(3)) {
+      if (jj_2_10(3)) {
+        jj_consume_token(31);
+      } else if (jj_2_11(3)) {
         jj_consume_token(QUOTE);
       } else {
         jj_consume_token(-1);
         throw new ParseException();
       }
-{if ("" != null) return a.not();}
+not=true;
     } else {
       ;
     }
-{if ("" != null) return a;}
+if(not){
+      {if ("" != null) return a.not();}
+    }
+    {if ("" != null) return a;}
     throw new Error("Missing return statement in function");
 }
 
   final public func element() throws ParseException {func a;
-    if (jj_2_12(3)) {
+    if (jj_2_13(3)) {
       a = cons();
 {if ("" != null) return a;}
-    } else if (jj_2_13(3)) {
+    } else if (jj_2_14(3)) {
       a = var();
 {if ("" != null) return a;}
-    } else if (jj_2_14(3)) {
+    } else if (jj_2_15(3)) {
       jj_consume_token(LPAREN);
       a = expr();
       jj_consume_token(RPAREN);
@@ -113,10 +123,10 @@ a=new nand(a,b);
 }
 
   final public cons cons() throws ParseException {cons c;
-    if (jj_2_15(3)) {
+    if (jj_2_16(3)) {
       jj_consume_token(ZERO);
 c=cons.LOW;
-    } else if (jj_2_16(3)) {
+    } else if (jj_2_17(3)) {
       jj_consume_token(ONE);
 c=cons.HIGH;
     } else {
@@ -262,6 +272,24 @@ c=cons.HIGH;
     finally { jj_save(15, xla); }
   }
 
+  private boolean jj_2_17(int xla)
+ {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return (!jj_3_17()); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(16, xla); }
+  }
+
+  private boolean jj_3R_5()
+ {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (!jj_3_16()) return false;
+    jj_scanpos = xsp;
+    if (jj_3_17()) return true;
+    return false;
+  }
+
   private boolean jj_3R_3()
  {
     if (jj_3R_4()) return true;
@@ -273,45 +301,7 @@ c=cons.HIGH;
     return false;
   }
 
-  private boolean jj_3_10()
- {
-    if (jj_scan_token(QUOTE)) return true;
-    return false;
-  }
-
   private boolean jj_3_15()
- {
-    if (jj_scan_token(ZERO)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_5()
- {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (!jj_3_15()) return false;
-    jj_scanpos = xsp;
-    if (jj_3_16()) return true;
-    return false;
-  }
-
-  private boolean jj_3_9()
- {
-    if (jj_scan_token(30)) return true;
-    return false;
-  }
-
-  private boolean jj_3_11()
- {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (!jj_3_9()) return false;
-    jj_scanpos = xsp;
-    if (jj_3_10()) return true;
-    return false;
-  }
-
-  private boolean jj_3_14()
  {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_3()) return true;
@@ -319,7 +309,7 @@ c=cons.HIGH;
     return false;
   }
 
-  private boolean jj_3_13()
+  private boolean jj_3_14()
  {
     if (jj_3R_6()) return true;
     return false;
@@ -329,32 +319,46 @@ c=cons.HIGH;
  {
     Token xsp;
     xsp = jj_scanpos;
-    if (!jj_3_12()) return false;
-    jj_scanpos = xsp;
     if (!jj_3_13()) return false;
     jj_scanpos = xsp;
-    if (jj_3_14()) return true;
+    if (!jj_3_14()) return false;
+    jj_scanpos = xsp;
+    if (jj_3_15()) return true;
     return false;
   }
 
-  private boolean jj_3_12()
+  private boolean jj_3_13()
  {
     if (jj_3R_5()) return true;
     return false;
   }
 
-  private boolean jj_3R_7()
+  private boolean jj_3_9()
  {
-    if (jj_3R_8()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_11()) jj_scanpos = xsp;
+    if (jj_scan_token(30)) return true;
     return false;
   }
 
-  private boolean jj_3_16()
+  private boolean jj_3R_7()
+ {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_9()) jj_scanpos = xsp;
+    if (jj_3R_8()) return true;
+    xsp = jj_scanpos;
+    if (jj_3_12()) jj_scanpos = xsp;
+    return false;
+  }
+
+  private boolean jj_3_17()
  {
     if (jj_scan_token(ONE)) return true;
+    return false;
+  }
+
+  private boolean jj_3_11()
+ {
+    if (jj_scan_token(QUOTE)) return true;
     return false;
   }
 
@@ -399,6 +403,22 @@ c=cons.HIGH;
     return false;
   }
 
+  private boolean jj_3_10()
+ {
+    if (jj_scan_token(31)) return true;
+    return false;
+  }
+
+  private boolean jj_3_12()
+ {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (!jj_3_10()) return false;
+    jj_scanpos = xsp;
+    if (jj_3_11()) return true;
+    return false;
+  }
+
   private boolean jj_3_5()
  {
     if (jj_scan_token(XNOR)) return true;
@@ -417,6 +437,12 @@ c=cons.HIGH;
  {
     if (jj_scan_token(XOR)) return true;
     if (jj_3R_3()) return true;
+    return false;
+  }
+
+  private boolean jj_3_16()
+ {
+    if (jj_scan_token(ZERO)) return true;
     return false;
   }
 
@@ -460,7 +486,7 @@ c=cons.HIGH;
 	private static void jj_la1_init_0() {
 	   jj_la1_0 = new int[] {};
 	}
-  final private JJCalls[] jj_2_rtns = new JJCalls[16];
+  final private JJCalls[] jj_2_rtns = new JJCalls[17];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -666,7 +692,7 @@ c=cons.HIGH;
   /** Generate ParseException. */
   public ParseException generateParseException() {
 	 jj_expentries.clear();
-	 boolean[] la1tokens = new boolean[31];
+	 boolean[] la1tokens = new boolean[32];
 	 if (jj_kind >= 0) {
 	   la1tokens[jj_kind] = true;
 	   jj_kind = -1;
@@ -680,7 +706,7 @@ c=cons.HIGH;
 		 }
 	   }
 	 }
-	 for (int i = 0; i < 31; i++) {
+	 for (int i = 0; i < 32; i++) {
 	   if (la1tokens[i]) {
 		 jj_expentry = new int[1];
 		 jj_expentry[0] = i;
@@ -714,7 +740,7 @@ c=cons.HIGH;
 
   private void jj_rescan_token() {
 	 jj_rescan = true;
-	 for (int i = 0; i < 16; i++) {
+	 for (int i = 0; i < 17; i++) {
 	   try {
 		 JJCalls p = jj_2_rtns[i];
 
@@ -738,6 +764,7 @@ c=cons.HIGH;
 			   case 13: jj_3_14(); break;
 			   case 14: jj_3_15(); break;
 			   case 15: jj_3_16(); break;
+			   case 16: jj_3_17(); break;
 			 }
 		   }
 		   p = p.next;

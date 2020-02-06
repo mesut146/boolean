@@ -108,9 +108,14 @@ func term():
 func unary():
 {
   func a;
+  boolean not=false;
 }
 {
-  ( a=element() [ ("!" | "'")  {   return a.not();  }] ) {
+  ( ["~"{not=true;}] a=element() [ ("!" | "'")  {not=true;}] )
+  {
+    if(not){
+      return a.not();
+    }
     return a;
   }
 }

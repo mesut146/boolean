@@ -17,6 +17,7 @@ nand: expression = expression ( 'nand' ) expression
 xnor: expression = expression ( 'xnor' ) expression
 
 not/invert: expression = expression ( ' | ! )
+
 not/invert: expression = ~ expression
 
 # example
@@ -32,6 +33,12 @@ output: a and (b xor c)
 System.out.println(f.not());
 
 output: a' or (b xnor c)
+
+//prints only with and , or gates
+
+System.out.println(f.alternate());
+
+output: 
 
 //prints truth table
 

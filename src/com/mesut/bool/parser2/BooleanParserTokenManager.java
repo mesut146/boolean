@@ -62,7 +62,7 @@ private int jjMoveStringLiteralDfa0_0(){
    switch(curChar)
    {
       case 33:
-         return jjStopAtPos(0, 30);
+         return jjStopAtPos(0, 31);
       case 39:
          return jjStopAtPos(0, 17);
       case 40:
@@ -97,6 +97,8 @@ private int jjMoveStringLiteralDfa0_0(){
          return jjStopAtPos(0, 10);
       case 125:
          return jjStopAtPos(0, 11);
+      case 126:
+         return jjStopAtPos(0, 30);
       default :
          return jjMoveNfa_0(0, 0);
    }
@@ -378,7 +380,8 @@ private int jjMoveNfa_0(int startState, int curPos)
 public static final String[] jjstrLiteralImages = {
 "", null, null, null, null, "\60", "\61", null, "\50", "\51", "\173", "\175", 
 "\133", "\135", "\73", "\72", "\54", "\47", "\75", "\55", "\57", null, null, null, 
-"\156\157\162", "\156\141\156\144", "\170\156\157\162", "\156\157\164", null, null, "\41", };
+"\156\157\162", "\156\141\156\144", "\170\156\157\162", "\156\157\164", null, null, "\176", 
+"\41", };
 protected Token jjFillToken()
 {
    final Token t;
@@ -393,9 +396,7 @@ protected Token jjFillToken()
    beginColumn = input_stream.getBeginColumn();
    endLine = input_stream.getEndLine();
    endColumn = input_stream.getEndColumn();
-   t = Token.newToken(jjmatchedKind);
-   t.kind = jjmatchedKind;
-   t.image = curTokenImage;
+   t = Token.newToken(jjmatchedKind, curTokenImage);
 
    t.beginLine = beginLine;
    t.endLine = endLine;
@@ -588,10 +589,10 @@ public static final String[] lexStateNames = {
 /** Lex State array. */
 public static final int[] jjnewLexState = {
    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
-   -1, -1, -1, -1, -1, -1, 
+   -1, -1, -1, -1, -1, -1, -1, 
 };
 static final long[] jjtoToken = {
-   0x5fffffe1L, 
+   0xdfffffe1L, 
 };
 static final long[] jjtoSkip = {
    0x1eL, 

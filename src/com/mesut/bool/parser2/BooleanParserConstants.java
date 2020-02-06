@@ -96,6 +96,7 @@ public interface BooleanParserConstants {
     "\"not\"",
     "<IDENT>",
     "<CHAR>",
+    "\"~\"",
     "\"!\"",
   };
 
