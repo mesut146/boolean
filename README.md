@@ -4,21 +4,21 @@ a java library for boolean algebra that supports infinite variables
 
 # grammar
 
-and: expression = expression ( 'and' | '&&' | '&' | '.' | '\*' ) expression
+- and: expression = expression ( 'and' | '&&' | '&' | '.' | '\*' ) expression
 
-or: expression = expression ( 'or' | '||' | '|' | '+' ) expression
+- or: expression = expression ( 'or' | '||' | '|' | '+' ) expression
 
-xor: expression = expression ( 'xor' | '^' ) expression
+- xor: expression = expression ( 'xor' | '^' ) expression
 
-nor: expression = expression ( 'nor' ) expression
+- nor: expression = expression ( 'nor' ) expression
 
-nand: expression = expression ( 'nand' ) expression
+- nand: expression = expression ( 'nand' ) expression
 
-xnor: expression = expression ( 'xnor' ) expression
+- xnor: expression = expression ( 'xnor' ) expression
 
-not/invert: expression = expression ( ' | ! )
+- not/invert: expression = expression ( ' | ! )
 
-not/invert: expression = ~ expression
+- not/invert: expression = ~ expression
 
 # examples
 
@@ -28,19 +28,20 @@ System.out.println(f);
 
 output: a and (b xor c)
 
-//prints inverted expression
+prints inverted expression
 
-System.out.println(f.not());
+`System.out.println(f.not());`
 
 output: a' or (b xnor c)
 
-//prints only with and , or gates
+prints only with and , or gates
 
-System.out.println(f.alternate());
+`System.out.println(f.alternate());`
 
 output:
 
-//prints truth table
+prints truth table
 
-System.out.println(f.truthTable());
+`System.out.println(f.truthTable());`
+
 output:
