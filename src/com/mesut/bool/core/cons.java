@@ -1,4 +1,4 @@
-package core;
+package com.mesut.bool.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,6 @@ public class cons extends func {
     public static final cons LOW = new cons(false);
     public static final cons HIGH = new cons(true);
     public static final cons ZERO = LOW, ONE = HIGH;
-
     boolean value;
 
     public cons(boolean value) {
@@ -23,7 +22,7 @@ public class cons extends func {
     }
 
     @Override
-    String toString2() {
+    protected String toString2() {
         return value ? "1" : "0";
     }
 
@@ -50,6 +49,10 @@ public class cons extends func {
     @Override
     public cons get(var[] v, cons[] c) {
         return this;
+    }
+
+    public boolean getValue(){
+        return value;
     }
 
     @Override

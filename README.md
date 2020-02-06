@@ -4,57 +4,60 @@ a java library for boolean algebra that supports infinite variables
 
 # grammar
 
-| operator   | grammar                                       |
-| ---------- | --------------------------------------------- |
-| and        | expression = expression ( 'and'               | '&&' | '&' | '.' | '\*' ) expression |
-| or         | expression = expression ( 'or'                | ' |  | ' | ' | ' | '+' ) expression |
-| xor        | expression = expression ( 'xor'               | '^' ) expression |
-| nor        | expression = expression ( 'nor' ) expression  |
-| nand       | expression = expression ( 'nand' ) expression |
-| xnor       | expression = expression ( 'xnor' ) expression |
-| not/invert | expression = expression ( '                   | ! ) |
-| not/invert | expression = ~ expression                     |
+| operator   | grammar
+| ---------- | ----------------------------------------------------------- |
+| and        | expression = expression ( ```and``` , ```&&```, ```&``` , ```*``` , ```.``` ) expression |
+| or         | expression = expression ( ```or``` , ```||``` , ```|``` , ```+``` ) expression |
+| xor        | expression = expression ( ```xor```  , ```^```) expression |
+| nor        | expression = expression ( ```nor``` ) expression  |
+| nand       | expression = expression ( ```nand``` ) expression |
+| xnor       | expression = expression ( ```xnor``` ) expression |
+| not/invert | expression = expression ( ```!``` , ```'``` ) |
+| not/invert | expression = ```~``` expression |
 
 # examples
+**full adder**
+```
+func sum = func.parse("(a xor b) xor carry_in");
+func carry_out = func.parse("(carry_in and (a xor b)) or (b and a)");
+System.out.println(new TruthTable(sum, carry_out).toString());
+```
+*output:*
+```
+F1=(a xor b) xor carry_in
+F2=(carry_in and (a xor b)) or (b and a)
+a b carry_in | F1 F2
+------------
+0 0 0 | 0 0
+0 0 1 | 1 0
+0 1 0 | 1 0
+0 1 1 | 0 1
+1 0 0 | 1 0
+1 0 1 | 0 1
+1 1 0 | 0 1
+1 1 1 | 1 1
+```
 
-`func f = func.parse("a and (b xor c)");`
+**invert**
+```
+func f = func.parse("a and (b xor c)");
+System.out.println(f.not());
+```
+*output*:
 
-`System.out.println(f);`
+`a nand (b xor c)`
 
-output: a and (b xor c)
 
-prints inverted expression
-
-`System.out.println(f.not());`
-
-output: a nand (b xor c)
-
-`System.out.println(f.not().alternate());`
-
-output: a nand (b xor c)
-
-prints only with and , or gates
+**print with only and , or gates**
 
 `System.out.println(f.alternate());`
 
 output:
 
-prints truth table
+`a and ((b and ~c) or (~b and c))`
 
-`System.out.println(f.truthTable());`
 
-output:
+#todo
 
-```
-F1=a and (b xor c)
-a b c | F1
-----------
-0 0 0 | 0
-0 0 1 | 0
-0 1 0 | 0
-0 1 1 | 0
-1 0 0 | 0
-1 0 1 | 1
-1 1 0 | 1
-1 1 1 | 0
-```
+- karnaugh map
+

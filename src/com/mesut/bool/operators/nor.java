@@ -1,4 +1,6 @@
-package operators;
+package com.mesut.bool.operators;
+
+import com.mesut.bool.core.*;
 
 import java.util.*;
 
@@ -13,51 +15,58 @@ public class nor extends func {
     }
 
     @Override
-    String toString2() {
-        StringBuilder s = new StringBuilder();
+    protected String toString2() {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < f.size(); i++) {
-            s.append(f.get(i));
+            func term = f.get(i);
+            if (!term.isCons()  && !term.isVar()) {
+                sb.append(term.top());
+            } else {
+                sb.append(term);
+            }
             if (i < f.size() - 1) {
-                s.append(norDel);
+                sb.append(norDel);
             }
         }
-        return s.toString();
+        return sb.toString();
     }
 
     @Override
     public func simplify() {
-        // TODO: Implement this method
         return this;
     }
 
     @Override
     public func not() {
-        // TODO: Implement this method
         return new or(f);
     }
 
     @Override
     public cons get(var[] v, cons[] c) {
-        // TODO: Implement this method
-        return null;
+        return alternate().get(v,c);
     }
 
     @Override
-    protected boolean eq2(func v) {
-        // TODO: Implement this method
-        return false;
+    protected boolean eq2(func other) {
+        return isEq(f,other.f);
     }
 
     @Override
     public int total() {
-        // TODO: Implement this method
-        return 0;
+        int total = 0;
+        for (func term : f) {
+            total += term.total();
+        }
+        return total;
     }
 
     @Override
     public List<var> list() {
-        // TODO: Implement this method
-        return null;
+        Set<var> result = new HashSet<>();
+        for (func term : f) {
+            result.addAll(term.list());
+        }
+        return asList(result);
     }
 
     public func alternate() {

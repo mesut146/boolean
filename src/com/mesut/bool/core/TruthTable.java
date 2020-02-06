@@ -1,12 +1,15 @@
-package core;
+package com.mesut.bool.core;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class TruthTable {
     List<var> vars;
     List<List<cons>> in;
     List<List<cons>> out;
     func[] f;
+    boolean calculated = false;
 
     public TruthTable(func... f) {
         this.f = f;
@@ -37,7 +40,7 @@ public class TruthTable {
             }
             out.add(ls);
         }
-
+        calculated = true;
     }
 
     // add 0's to str so that total is the final length
@@ -51,13 +54,17 @@ public class TruthTable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < f.length; i++) {
-            sb.append("F" + (i + 1) + "=" + f[i].toString() + "\n");
+        if (!calculated) {
+            calc();
         }
-        sb.append(join(vars) + " | ");
+        StringBuilder sb = new StringBuilder("\n");
+        //print functions with name
         for (int i = 0; i < f.length; i++) {
-            sb.append("F" + (i + 1));
+            sb.append("F").append(i + 1).append("=").append(f[i]).append("\n");
+        }
+        sb.append(join(vars)).append(" | ");
+        for (int i = 0; i < f.length; i++) {
+            sb.append("F").append(i + 1);
             if (i < f.length - 1) {
                 sb.append(" ");
             }
@@ -70,7 +77,7 @@ public class TruthTable {
         for (int i = 0; i < in.size(); i++) {
             sb.append(join(in.get(i)));
 
-            sb.append(" | " + join(out.get(i)));
+            sb.append(" | ").append(join(out.get(i)));
             if (i < in.size() - 1) {
                 sb.append("\n");
             }

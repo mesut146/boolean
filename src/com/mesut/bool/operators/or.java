@@ -1,7 +1,8 @@
-package operators;
+package com.mesut.bool.operators;
+
+import com.mesut.bool.core.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.*;
 
@@ -15,7 +16,7 @@ public class or extends func {
     }
 
     @Override
-    String toString2() {
+    protected String toString2() {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < f.size(); i++) {
             func p = f.get(i);
@@ -68,12 +69,6 @@ public class or extends func {
         s();
         return this;
     }
-
-    /*
-     * @Override public func cnf() {
-     * 
-     * return null; }
-     */
 
     List<var> toVar(func l) {
         List<var> l1 = new ArrayList<>();
@@ -153,7 +148,7 @@ public class or extends func {
     @Override
     public cons get(var[] v, cons[] c) {
         for (func term : f) {
-            if (term.get(v, c).value) {
+            if (term.get(v, c).getValue()) {
                 return cons.HIGH;
             }
         }

@@ -1,4 +1,6 @@
-package operators;
+package com.mesut.bool.operators;
+
+import com.mesut.bool.core.*;
 
 import java.util.*;
 
@@ -13,11 +15,11 @@ public class xnor extends func {
     }
 
     @Override
-    String toString2() {
+    protected String toString2() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < f.size(); i++) {
             func term = f.get(i);
-            if (!term.isCons() && !term.isXnor() && !term.isVar()) {
+            if (!term.isCons()  && !term.isVar()) {
                 sb.append(term.top());
             } else {
                 sb.append(term);

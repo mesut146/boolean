@@ -7,9 +7,10 @@ options
 
 PARSER_BEGIN(BooleanParser)
 
-package com.mesut.bool.parser2;
+package com.mesut.bool.parser;
 
-import core.*;
+import com.mesut.bool.operators.*;
+import com.mesut.bool.core.*;
 import java.util.*;
 
 public class BooleanParser
@@ -25,13 +26,8 @@ SKIP :
 
 TOKEN:
 {
-    <ZERO: "0">
+    <ZERO: "0" >
   | <ONE: "1" >
-}
-
-TOKEN:
-{
-  <DIGIT: ["0"-"9"] >
 }
 
 TOKEN :
@@ -66,9 +62,14 @@ TOKEN: /*built in functions */
 | <NOT: "not">
 }
 
+/*TOKEN:
+{
+  <#DIGIT: ["0"-"9"] >
+}*/
+
 TOKEN:
 {
-  <IDENT: <CHAR> (<CHAR>|<DIGIT>)*> 
+  <IDENT: <CHAR> ( <CHAR> | ["0"-"9"] | "_" )*>
 | <#CHAR: ["a"-"z","A"-"Z"]>
 }
 
@@ -111,7 +112,7 @@ func unary():
   boolean not=false;
 }
 {
-  ( ["~"{not=true;}] a=element() [ ("!" | "'")  {not=true;}] )
+   ["~"{not=true;}] a=element() [ ("!" | "'") {not=true;}]
   {
     if(not){
       return a.not();

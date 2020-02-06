@@ -1,4 +1,6 @@
-package operators;
+package com.mesut.bool.operators;
+
+import com.mesut.bool.core.*;
 
 import java.util.*;
 
@@ -13,7 +15,7 @@ public class and extends func {
     }
 
     @Override
-    String toString2() {
+    protected String toString2() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < f.size(); i++) {
             func term = f.get(i);
@@ -117,22 +119,22 @@ public class and extends func {
     }
 
     @Override
+    public cons get(var[] v, cons[] c) {
+        for (func term : f) {
+            if (!term.get(v, c).getValue()) {
+                return cons.LOW;
+            }
+        }
+        return cons.HIGH;
+    }
+
+    @Override
     public int total() {
         int total = 0;
         for (func term : f) {
             total += term.total();
         }
         return total;
-    }
-
-    @Override
-    public cons get(var[] v, cons[] c) {
-        for (func term : f) {
-            if (!term.get(v, c).value) {
-                return cons.LOW;
-            }
-        }
-        return cons.HIGH;
     }
 
     @Override

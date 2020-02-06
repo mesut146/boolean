@@ -1,18 +1,22 @@
-package core;
+package com.mesut.bool.core;
 
+import com.mesut.bool.operators.*;
+import com.mesut.bool.parser.BooleanParser;
+import com.mesut.bool.parser.ParseException;
+
+import java.io.StringReader;
 import java.util.*;
-import com.mesut.bool.parser2.*;
-import java.io.*;
 
 public abstract class func {
     public List<func> f = new ArrayList<>();// list of elements
     TruthTable tt = null;
-    static String andDel = " and ";
-    static String orDel = " or ";
-    static String xorDel = " xor ";
-    static String nandDel = " nand ";
-    static String norDel = " nor ";
-    static String xnorDel = " xnor ";
+    public static String andDel = " and ";
+    public static String orDel = " or ";
+    public static String xorDel = " xor ";
+    public static String nandDel = " nand ";
+    public static String norDel = " nor ";
+    public static String xnorDel = " xnor ";
+    public static String notDel = "~";
 
     @Override
     public final String toString() {
@@ -20,7 +24,7 @@ public abstract class func {
     }
 
     // internal printing
-    abstract String toString2();
+    protected abstract String toString2();
 
     public abstract func simplify();
 
@@ -90,7 +94,7 @@ public abstract class func {
     }
 
     public cons get(var v, cons c) {
-        return get(new var[] {v}, new cons[] {c});
+        return get(new var[]{v}, new cons[]{c});
     }
 
     public func get(String str) {
@@ -127,7 +131,7 @@ public abstract class func {
     }
 
     public final boolean eq(func v) {
-        return super.getClass() == v.getClass() ? eq2(v) : false;
+        return super.getClass() == v.getClass() && eq2(v);
     }
 
     // internal equals
@@ -158,7 +162,7 @@ public abstract class func {
         return true;
     }
 
-    static List<func> free() {
+    protected static List<func> free() {
         return new ArrayList<func>();
     }
 
@@ -182,21 +186,15 @@ public abstract class func {
 
     public static <T> List<T> asList(T[] array) {
         List<T> list = new ArrayList<>();
-        for (T term : array) {
-            list.add(term);
-        }
+        Collections.addAll(list, array);
         return list;
     }
 
     public static <T> List<T> asList(Set<T> set) {
-        List<T> list = new ArrayList<>();
-        for (T term : set) {
-            list.add(term);
-        }
-        return list;
+        return new ArrayList<>(set);
     }
 
-    public static int find(List<?> list, Class target) {
+    public static int find(List<?> list, Class<?> target) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getClass() == target) {
                 return i;
@@ -228,7 +226,7 @@ public abstract class func {
         Collections.sort(list, new Comparator<var>() {
             @Override
             public int compare(var v1, var v2) {
-                return v1.c < v2.c ? -1 : 1;
+                return v1.getValue().compareTo(v2.getValue());
             }
         });
     }
@@ -239,7 +237,7 @@ public abstract class func {
             @Override
             public int compare(func v1, func v2) {
                 if (v1.isVar() && v2.isVar()) {
-                    return v1.asVar().c < v2.asVar().c ? -1 : 1;
+                    return v1.asVar().getValue().compareTo(v2.asVar().getValue());
                 }
                 return 0;
             }

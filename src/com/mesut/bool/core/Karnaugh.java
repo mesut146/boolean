@@ -1,4 +1,4 @@
-package core;
+package com.mesut.bool.core;
 
 import java.util.*;
 

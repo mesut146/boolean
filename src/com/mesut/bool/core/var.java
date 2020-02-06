@@ -1,22 +1,35 @@
-package core;
+package com.mesut.bool.core;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
+//todo var name may cause confliction in java 9
 public class var extends func {
-    char c;// single char for now
+    String value;
     boolean not = false;// is inverted?
 
-    public var(char c) {
-        this.c = c;
+    public var(char chr) {
+        this.value = String.valueOf(chr);
     }
 
-    public var(String s) {
-        c = s.charAt(0);
+    public var(String str) {
+        this.value = str;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     @Override
-    String toString2() {
-        return c + (not ? "'" : "");
+    protected String toString2() {
+        if (not) {
+            if (notDel.equals("'") || notDel.equals("!")) {
+                return value + notDel;
+            } else {
+                return "~" + value;
+            }
+        }
+        return value;
     }
 
     @Override
@@ -26,7 +39,7 @@ public class var extends func {
 
     @Override
     public var not() {
-        var v = new var(c);
+        var v = new var(value);
         v.not = !not;
         return v;
     }
@@ -39,7 +52,7 @@ public class var extends func {
     @Override
     public cons get(var[] v, cons[] c) {
         for (int i = 0; i < v.length; i++) {
-            if (v[i].c == this.c) {
+            if (v[i].value.equals(value)) {
                 cons result = c[i];
                 return not ? (cons) result.not() : result;
             }
@@ -51,14 +64,13 @@ public class var extends func {
     protected boolean eq2(func other) {
         // System.out.println("var.eq2 " + this + " other=" + other);
         var var = (var) other;
-        //return c == var.c && not == var.not;
-         return c == var.c;// list func may fail
+        return value.equals(var.value);// list func may fail
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + c;
+        hash = 31 * hash + value.hashCode();
         // hash = 31 * hash + (not ? 1 : 0);
         return hash;
 
