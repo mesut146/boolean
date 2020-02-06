@@ -1,10 +1,11 @@
 package core;
 
+// represents bit array
 public class bitx {
     int len;
-    bit[] b;
+    bit[] array;
 
-    public bitx(String s){
+    public bitx(String str) {
 
     }
 }

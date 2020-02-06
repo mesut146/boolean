@@ -20,7 +20,7 @@ not/invert: expression = expression ( ' | ! )
 
 not/invert: expression = ~ expression
 
-# example
+# examples
 
 func f = func.parse("a and (b xor c)");
 
@@ -38,7 +38,7 @@ output: a' or (b xnor c)
 
 System.out.println(f.alternate());
 
-output: 
+output:
 
 //prints truth table
 

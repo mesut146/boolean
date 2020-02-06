@@ -1,82 +1,76 @@
 package core;
+
 import java.util.*;
 
-public class xnor extends func
-{
+public class xnor extends func {
 
-    public xnor(func...arg){
-        f=asList(arg);
+    public xnor(func... array) {
+        f = asList(array);
     }
-    
-    public xnor(List<func> list){
-        f=new ArrayList<>(list);
+
+    public xnor(List<func> list) {
+        f.addAll(list);
     }
-    
+
     @Override
-    String toString2()
-    {
-        StringBuilder s=new StringBuilder();
-        for(int i=0;i<f.size();i++){
-            func p=f.get(i);
-            if(!p.isCons()&&!p.isXnor()&&!p.isVar()){
-                s.append(p.top());
-            }else{
-                s.append(p);
+    String toString2() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < f.size(); i++) {
+            func term = f.get(i);
+            if (!term.isCons() && !term.isXnor() && !term.isVar()) {
+                sb.append(term.top());
+            } else {
+                sb.append(term);
             }
-            if(i<f.size()-1){
-                s.append(xnorDel);
+            if (i < f.size() - 1) {
+                sb.append(xnorDel);
             }
         }
-        return s.toString();
+        return sb.toString();
     }
 
     @Override
-    public func simplify()
-    {
-        // TODO: Implement this method
+    public func simplify() {
         return this;
     }
 
     @Override
-    public func not()
-    {
-        // TODO: Implement this method
+    public func not() {
         return new xor(f);
     }
 
     @Override
-    public cons get(var[] v, cons[] c)
-    {
-        // TODO: Implement this method
-        return null;
+    public cons get(var[] v, cons[] c) {
+        return alternate().get(v, c);
     }
 
     @Override
-    protected boolean eq2(func v)
-    {
-        // TODO: Implement this method
-        return false;
+    protected boolean eq2(func other) {
+        return isEq(f, other.f);
     }
 
     @Override
-    public int total()
-    {
-        // TODO: Implement this method
-        return 0;
+    public int total() {
+        int total = 0;
+        for (func term : f) {
+            total += term.total();
+        }
+        return total;
     }
 
     @Override
-    public List<var> list()
-    {
-        // TODO: Implement this method
-        return null;
+    public List<var> list() {
+        Set<var> result = new HashSet<>();
+        for (func term : f) {
+            result.addAll(term.list());
+        }
+        return asList(result);
     }
-    
-    public func alternate()
-    {
-        List<func> list=new ArrayList<>();
-        for(func p:f){
-            list.add(p.alternate());
+
+    public func alternate() {
+        List<func> list = new ArrayList<>();
+        for (func term : f) {
+            list.add(term.alternate());
         }
         return new xor(list).alternate().not();
     }

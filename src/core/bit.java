@@ -1,28 +1,27 @@
 package core;
 
-public class bit
-{
-    boolean b;
+// represents single bit
+public class bit {
+    boolean value;
 
-    public bit(boolean b)
-    {
-        this.b = b;
-    }
-    public bit(int i)
-    {
-        b = (i == 1);
+    public bit(boolean value) {
+        this.value = value;
     }
 
-    public boolean isTrue()
-    {
-        return b;
+    public bit(int value) {
+        this.value = (value == 1);
     }
-    public boolean isFalse()
-    { return !b; }
+
+    public boolean isTrue() {
+        return value;
+    }
+
+    public boolean isFalse() {
+        return !value;
+    }
 
     @Override
-    public String toString()
-    {
-        return b ?"1": "0";
+    public String toString() {
+        return value ? "1" : "0";
     }
 }

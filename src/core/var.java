@@ -1,77 +1,75 @@
 package core;
+
 import java.util.*;
 
-public class var extends func
-{
-    char c;
-    boolean not=false;
+public class var extends func {
+    char c;// single char for now
+    boolean not = false;// is inverted?
 
-    public var(char c){
-        this.c=c;
-    }
-    public var(String s){
-        c=s.charAt(0);
+    public var(char c) {
+        this.c = c;
     }
 
-    @Override
-    String toString2()
-    {
-        return c+(not?"'":"");
+    public var(String s) {
+        c = s.charAt(0);
     }
 
     @Override
-    public func simplify()
-    {
+    String toString2() {
+        return c + (not ? "'" : "");
+    }
+
+    @Override
+    public func simplify() {
         return this;
     }
 
     @Override
     public var not() {
-        var v=new var(c);
-        v.not=!not;
+        var v = new var(c);
+        v.not = !not;
         return v;
     }
 
     @Override
-    protected boolean eq2(func v) {
-        var a=(var)v;
-        if (c==a.c&&not==a.not){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public int total()
-    {
+    public int total() {
         return 1;
     }
 
     @Override
-    public cons get(var[] v, cons[] c)
-    {
-        for(int i=0;i<v.length;i++){
-            if(v[i].c==this.c){
-                cons t=c[i];
-                return not?(cons)t.not():t;
+    public cons get(var[] v, cons[] c) {
+        for (int i = 0; i < v.length; i++) {
+            if (v[i].c == this.c) {
+                cons result = c[i];
+                return not ? (cons) result.not() : result;
             }
         }
         return null;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.eq((func)obj);
+    protected boolean eq2(func other) {
+        // System.out.println("var.eq2 " + this + " other=" + other);
+        var var = (var) other;
+        //return c == var.c && not == var.not;
+         return c == var.c;// list func may fail
     }
+
     @Override
     public int hashCode() {
-        return c;
+        int hash = 7;
+        hash = 31 * hash + c;
+        // hash = 31 * hash + (not ? 1 : 0);
+        return hash;
+
     }
 
     @Override
     public List<var> list() {
-        return new ArrayList<var>(){{
-            add(new var(c));
-        }};
+
+        List<var> list = new ArrayList<var>();
+        list.add(this);
+        return list;
+
     }
 }

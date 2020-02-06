@@ -11,7 +11,7 @@ public class Karnaugh
 
     public Karnaugh(func f)
     {
-        tt t = new tt(f);
+        TruthTable t = new TruthTable(f);
         t.calc();
         System.out.println(t);
         int len = t.vars.size();
@@ -38,7 +38,7 @@ public class Karnaugh
                 boolean b[] = new boolean[len];
                 System.arraycopy(r[i], 0, b, 0, r[i].length);
                 System.arraycopy(c[j], 0, b, r[i].length, c[j].length);
-                map[i][j] = t.out.get(b2int(b)).get(0).b;
+                map[i][j] = t.out.get(b2int(b)).get(0).value;
             }
         }
         //System.out.println(arr(map));
@@ -90,7 +90,7 @@ public class Karnaugh
         int y = b[0].length;
         for (int i = 0; i < x; i++)
         {
-            String s = tt.fix(Integer.toBinaryString(i ^ (i >> 1)), y);
+            String s = TruthTable.fix(Integer.toBinaryString(i ^ (i >> 1)), y);
             for (int j = 0; j < y; j++)
             {
                 b[i][j] = s.charAt(j) == '1';

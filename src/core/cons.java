@@ -3,51 +3,52 @@ package core;
 import java.util.ArrayList;
 import java.util.List;
 
-public class cons extends func
-{
-    public static final cons LOW=new cons(false);
-    public static final cons HIGH=new cons(true);
-    public static final cons ZERO=LOW,ONE=HIGH;
-    
-    boolean b;
-    public cons(boolean b){
-        this.b=b;
+public class cons extends func {
+    public static final cons LOW = new cons(false);
+    public static final cons HIGH = new cons(true);
+    public static final cons ZERO = LOW, ONE = HIGH;
+
+    boolean value;
+
+    public cons(boolean value) {
+        this.value = value;
     }
-    public cons(int i){
-        this.b=(i==1);
+
+    public cons(int value) {
+        this.value = (value == 1);
     }
-    public cons(char c){ this.b=c=='1'; }
-    @Override
-    String toString2()
-    {
-        return b?"1":"0";
+
+    public cons(char chr) {
+        this.value = chr == '1';
     }
 
     @Override
-    public cons simplify()
-    {
+    String toString2() {
+        return value ? "1" : "0";
+    }
+
+    @Override
+    public cons simplify() {
         return this;
     }
 
     @Override
     public func not() {
-        return new cons(!b);
+        return new cons(!value);
     }
 
     @Override
     protected boolean eq2(func v) {
-        return b==v.asCons().b;
+        return value == v.asCons().value;
     }
 
     @Override
-    public int total()
-    {
-        return 1;
+    public int total() {
+        return 0;
     }
 
     @Override
-    public cons get(var[] v, cons[] c)
-    {
+    public cons get(var[] v, cons[] c) {
         return this;
     }
 
