@@ -4,26 +4,36 @@ a java library for boolean algebra that supports infinite variables
 
 # grammar
 
-expression = expression ( 'and' | '&&' | '&' | '.' | '\*' ) expression
+and: expression = expression ( 'and' | '&&' | '&' | '.' | '\*' ) expression
 
-expression = expression ( 'or' | '||' | '|' | '+' ) expression
+or: expression = expression ( 'or' | '||' | '|' | '+' ) expression
 
-expression = expression ( 'xor' | '^' ) expression
+xor: expression = expression ( 'xor' | '^' ) expression
 
-expression = expression ( 'nor' ) expression
+nor: expression = expression ( 'nor' ) expression
 
-expression = expression ( 'nand' ) expression
+nand: expression = expression ( 'nand' ) expression
 
-expression = expression ( 'xnor' ) expression
+xnor: expression = expression ( 'xnor' ) expression
+
+not/invert: expression = expression ( ' | ! )
+not/invert: expression = ~ expression
 
 # example
 
 func f = func.parse("a and (b xor c)");
+
 System.out.println(f);
+
 output: a and (b xor c)
 
-System.out.println(f.not()); //prints inverted expression
+//prints inverted expression
+
+System.out.println(f.not());
+
 output: a' or (b xnor c)
 
-System.out.println(f.truthTable()); //prints truth table
+//prints truth table
+
+System.out.println(f.truthTable());
 output:
