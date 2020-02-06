@@ -17,7 +17,7 @@ a java library for boolean algebra that supports infinite variables
 
 # examples
 **full adder**
-```
+```java
 func sum = func.parse("(a xor b) xor carry_in");
 func carry_out = func.parse("(carry_in and (a xor b)) or (b and a)");
 System.out.println(new TruthTable(sum, carry_out).toString());

@@ -1,12 +1,11 @@
 import com.mesut.bool.core.Karnaugh;
 import com.mesut.bool.core.TruthTable;
 import com.mesut.bool.core.func;
-import com.mesut.bool.core.var;
 
 
 public class Main {
     public static void main(String[] args) {
-        var a = new var("a");
+        //var a = new var("a");
         // var b = new var("b");
         // var c = new var("c");
         // var d = new var("d");
