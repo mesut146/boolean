@@ -111,7 +111,7 @@ func unary():
   boolean not=false;
 }
 {
-  ( ["~"]{not=true;} a=element() [ ("!" | "'")  {not=true;}] )
+  ( ["~"{not=true;}] a=element() [ ("!" | "'")  {not=true;}] )
   {
     if(not){
       return a.not();

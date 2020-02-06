@@ -42,6 +42,7 @@ public class and extends func {
                     return cons.LOW;
                 } else {
                     // no need to add 1
+                    continue;
                 }
             } else {
                 l.add(v);
@@ -53,6 +54,9 @@ public class and extends func {
             return cons.HIGH;
         } else if (f.size() == 1) {
             return f.get(0);
+        }
+        if (true) {
+            return this;
         }
         // a(b+c)=ab+ac
         l.clear();

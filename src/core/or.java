@@ -50,12 +50,17 @@ public class or extends func {
         }
         f.clear();
         f.addAll(l);
-        if (f.size() == 1) {
-            return f.get(0);
-        }
         if (f.size() == 0) {
             return cons.LOW;
         }
+        if (f.size() == 1) {
+            return f.get(0);
+        }
+
+        if (true) {
+            return this;
+        }
+        // todo
         var();
         if (f.size() == 1) {
             return f.get(0);

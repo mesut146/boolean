@@ -164,6 +164,7 @@ public abstract class func {
 
     // old
     public static func parse(String s) {
+
         return parser.Parser.parse(s);
     }
 

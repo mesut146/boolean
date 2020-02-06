@@ -54,11 +54,15 @@ public class xor extends func {
         func a = f.get(0);
         func b = f.size() == 2 ? f.get(1) : new xor(wout(0));
 
+        // System.out.println("a=" + a + " b=" + b);
+
         a = a.alternate();
         b = b.alternate();
-        func l = a.and(b.not());
-        func r = a.not().and(b);
-        return l.or(r);
+        // System.out.println("a.alter=" + a + " b.alter=" + b);
+        func left = a.and(b.not());
+        func right = a.not().and(b);
+        // System.out.println("l=" + left + " r=" + right + " or=" + left.or(right));
+        return left.or(right);
     }
 
     @Override
@@ -74,6 +78,10 @@ public class xor extends func {
 
     @Override
     public List<var> list() {
-        return alternate().list();
+        Set<var> result = new HashSet<>();
+        for (func term : f) {
+            result.addAll(term.list());
+        }
+        return asList(result);
     }
 }

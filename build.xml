@@ -4,7 +4,7 @@
     <property name="build.dir" value="build" />
     <property name="classes.dir" value="${build.dir}/classes" />
     <property name="jar.dir" value="${build.dir}/jar" />
-    <property name="jar.path" value="${jar}/boolean.jar" />
+    <property name="jar.path" value="${jar.dir}/boolean.jar" />
     <property name="main-class" value="Main" />
     <property name="lib.dir" value="lib" />
     <property name="javacc" value="/home/mesut/Desktop/lib/javacc-7.0.5.jar" />
@@ -31,7 +31,7 @@
 
     <target name="jar">
         <mkdir dir="${jar.dir}" />
-        <jar destfile="${jar.dir}/java2cpp.jar" basedir="${classes.dir}">
+        <jar destfile="${jar.path}" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="${main-class}" />
             </manifest>

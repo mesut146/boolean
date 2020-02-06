@@ -11,10 +11,10 @@ public class Main {
         func f = null, g = null;
         // f = func.parse2("a xor b");
         f = func.parse2("a and (b xor c)");
-        System.out.println("f= " + f);
-        System.out.println("f.not= " + f.not());
-        // System.out.println("f.alter= " + f.alternate());
-        // System.out.println("f.not.alter= " + f.not().alternate());
+        System.out.println("f = " + f);
+        System.out.println("f.not = " + f.not());
+        System.out.println("f.alter = " + f.alternate());
+        System.out.println("f.not.alter = " + f.not().alternate());// todo
 
         System.out.println(f.truthTable());
         // Karnaugh k=new Karnaugh(f);

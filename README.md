@@ -22,9 +22,9 @@ a java library for boolean algebra that supports infinite variables
 
 # examples
 
-func f = func.parse("a and (b xor c)");
+`func f = func.parse("a and (b xor c)");`
 
-System.out.println(f);
+`System.out.println(f);`
 
 output: a and (b xor c)
 
@@ -32,7 +32,11 @@ prints inverted expression
 
 `System.out.println(f.not());`
 
-output: a' or (b xnor c)
+output: a nand (b xor c)
+
+`System.out.println(f.not().alternate());`
+
+output: a nand (b xor c)
 
 prints only with and , or gates
 
