@@ -59,7 +59,6 @@ output:
 `a and ((b and ~c) or (~b and c))`
 
 
-#todo
-
+# todo
 - karnaugh map
 
