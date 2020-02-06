@@ -49,3 +49,17 @@ prints truth table
 `System.out.println(f.truthTable());`
 
 output:
+
+```
+F1=a and (b xor c)
+a b c | F1
+----------
+0 0 0 | 0
+0 0 1 | 0
+0 1 0 | 0
+0 1 1 | 0
+1 0 0 | 0
+1 0 1 | 1
+1 1 0 | 1
+1 1 1 | 0
+```

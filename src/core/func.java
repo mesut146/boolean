@@ -162,14 +162,8 @@ public abstract class func {
         return new ArrayList<func>();
     }
 
-    // old
-    public static func parse(String s) {
-
-        return parser.Parser.parse(s);
-    }
-
     // with javacc
-    public static func parse2(String expr) {
+    public static func parse(String expr) {
         BooleanParser parser = new BooleanParser(new StringReader(expr));
         try {
             return parser.expr();

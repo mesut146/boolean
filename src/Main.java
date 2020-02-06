@@ -9,8 +9,8 @@ public class Main {
         // var d = new var("d");
         // var e = new var("e");
         func f = null, g = null;
-        // f = func.parse2("a xor b");
-        f = func.parse2("a and (b xor c)");
+        // f = func.parse("a xor b");
+        f = func.parse("a and (b xor c)");
         System.out.println("f = " + f);
         System.out.println("f.not = " + f.not());
         System.out.println("f.alter = " + f.alternate());
