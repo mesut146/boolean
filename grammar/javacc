@@ -3,7 +3,7 @@
 dir=$(dirname $0)
 
 grammar="${dir}/boolean.jj"
-out="${dir}/../src/com/mesut/bool/parser2"
+out="${dir}/../src/com/mesut/bool/parser"
 #cc="/storage/extSdCard/lib/javacc-7.0.5.jar"
 cc="/home/mesut/Desktop/lib/javacc-7.0.5.jar"
 
