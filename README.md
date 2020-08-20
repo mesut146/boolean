@@ -39,7 +39,7 @@ a b carry_in | F1 F2
 ```
 
 **invert**
-```
+```java
 func f = func.parse("a and (b xor c)");
 System.out.println(f.not());
 ```
@@ -50,14 +50,15 @@ System.out.println(f.not());
 
 **print with only and , or gates**
 
-`System.out.println(f.alternate());`
+```java
+System.out.println(f.alternate());
+```
 
 output:
 
 `a and ((b and ~c) or (~b and c))`
 
 
-#todo
-
+# todo
 - karnaugh map
 
