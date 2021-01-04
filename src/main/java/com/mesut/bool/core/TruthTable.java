@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class TruthTable {
-    List<var> vars;
+    List<variable> vars;
     List<List<cons>> in;
     List<List<cons>> out;
     func[] f;
@@ -19,7 +19,7 @@ public class TruthTable {
     }
 
     public void calc() {
-        HashSet<var> set = new HashSet<>();
+        HashSet<variable> set = new HashSet<>();
         for (func term : f) {
             set.addAll(term.list());
         }
@@ -36,7 +36,7 @@ public class TruthTable {
             in.add(lc);
             List<cons> ls = new ArrayList<>();
             for (int j = 0; j < f.length; j++) {
-                ls.add(f[j].get(vars.toArray(new var[0]), lc.toArray(new cons[0])));
+                ls.add(f[j].get(vars.toArray(new variable[0]), lc.toArray(new cons[0])));
             }
             out.add(ls);
         }

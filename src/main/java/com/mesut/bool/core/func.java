@@ -8,15 +8,8 @@ import java.io.StringReader;
 import java.util.*;
 
 public abstract class func {
-    public List<func> f = new ArrayList<>();// list of elements
+    public List<func> list = new ArrayList<>();// list of elements
     TruthTable tt = null;
-    public static String andDel = " and ";
-    public static String orDel = " or ";
-    public static String xorDel = " xor ";
-    public static String nandDel = " nand ";
-    public static String norDel = " nor ";
-    public static String xnorDel = " xnor ";
-    public static String notDel = "~";
 
     @Override
     public final String toString() {
@@ -26,7 +19,7 @@ public abstract class func {
     // internal printing
     protected abstract String toString2();
 
-    public abstract func simplify();
+    public func simplify(){return this;}
 
     public func and(func f) {
         return new and(this, f).simplify();
@@ -41,7 +34,9 @@ public abstract class func {
     }
 
     // invert
-    public abstract func not();
+    public func not(){
+        return new not(this);
+    }
 
     public boolean isAnd() {
         return this instanceof and;
@@ -72,7 +67,15 @@ public abstract class func {
     }
 
     public boolean isVar() {
-        return this instanceof var;
+        return this instanceof variable;
+    }
+
+    public boolean isNot(){
+        return this instanceof not;
+    }
+
+    public not asNot(){
+        return (not)this;
     }
 
     public cons asCons() {
@@ -87,31 +90,31 @@ public abstract class func {
         return isCons() && asCons().value;
     }
 
-    public abstract cons get(var[] v, cons[] c);
+    public abstract cons get(variable[] v, cons[] c);
 
-    public cons get(List<var> v, List<cons> c) {
-        return get(v.toArray(new var[0]), c.toArray(new cons[0]));
+    public cons get(List<variable> v, List<cons> c) {
+        return get(v.toArray(new variable[0]), c.toArray(new cons[0]));
     }
 
-    public cons get(var v, cons c) {
-        return get(new var[]{v}, new cons[]{c});
+    public cons get(variable v, cons c) {
+        return get(new variable[]{v}, new cons[]{c});
     }
 
     public func get(String str) {
         String[] groups = str.split(",");
-        var[] vars = new var[groups.length];
+        variable[] vars = new variable[groups.length];
         cons[] cons = new cons[groups.length];
         String[] assign;
         for (int i = 0; i < groups.length; i++) {
             assign = groups[i].split("=");
-            vars[i] = new var(assign[0]);
+            vars[i] = new variable(assign[0]);
             cons[i] = new cons(Integer.parseInt(assign[1]));
         }
         return get(vars, cons);
     }
 
-    public var asVar() {
-        return (var) this;
+    public variable asVar() {
+        return (variable) this;
     }
 
     public TruthTable truthTable() {
@@ -180,7 +183,7 @@ public abstract class func {
     public abstract int total();
 
     // list of variables
-    public abstract List<var> list();
+    public abstract List<variable> list();
 
     // public abstract func cnf();
 
@@ -205,12 +208,15 @@ public abstract class func {
 
     // cover with paranthesis
     public String top() {
+        if(isVar()){
+           return toString();
+        }
         return "(" + toString() + ")";
     }
 
     // without i th element
     public List<func> wout(int i) {
-        List<func> copy = new ArrayList<>(f);
+        List<func> copy = new ArrayList<>(list);
         copy.remove(i);
         return copy;
     }
@@ -222,11 +228,11 @@ public abstract class func {
 
 
     // sort by var
-    public static void sort2(List<var> list) {
-        Collections.sort(list, new Comparator<var>() {
+    public static void sort2(List<variable> list) {
+        Collections.sort(list, new Comparator<variable>() {
             @Override
-            public int compare(var v1, var v2) {
-                return v1.getValue().compareTo(v2.getValue());
+            public int compare(variable v1, variable v2) {
+                return v1.getName().compareTo(v2.getName());
             }
         });
     }
@@ -237,7 +243,7 @@ public abstract class func {
             @Override
             public int compare(func v1, func v2) {
                 if (v1.isVar() && v2.isVar()) {
-                    return v1.asVar().getValue().compareTo(v2.asVar().getValue());
+                    return v1.asVar().getName().compareTo(v2.asVar().getName());
                 }
                 return 0;
             }

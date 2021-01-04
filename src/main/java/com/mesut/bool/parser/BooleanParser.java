@@ -4,7 +4,6 @@ package com.mesut.bool.parser;
 
 import com.mesut.bool.operators.*;
 import com.mesut.bool.core.*;
-import java.util.*;
 
 public class BooleanParser implements BooleanParserConstants {
 
@@ -105,7 +104,7 @@ not=true;
       ;
     }
 if(not){
-      {if ("" != null) return a.not();}
+      {if ("" != null) return new not(a);}
     }
     {if ("" != null) return a;}
     throw new Error("Missing return statement in function");
@@ -145,10 +144,10 @@ c=cons.HIGH;
     throw new Error("Missing return statement in function");
 }
 
-  final public var var() throws ParseException {var v;
+  final public variable var() throws ParseException {var v;
   Token token;
     token = jj_consume_token(IDENT);
-{if ("" != null) return new var(token.toString());}
+{if ("" != null) return new variable(token.toString());}
     throw new Error("Missing return statement in function");
 }
 
@@ -302,6 +301,16 @@ c=cons.HIGH;
     try { return (!jj_3_19()); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(18, xla); }
+  }
+
+  private boolean jj_3R_5()
+ {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (!jj_3_18()) return false;
+    jj_scanpos = xsp;
+    if (jj_3_19()) return true;
+    return false;
   }
 
   private boolean jj_3R_3()
@@ -494,16 +503,6 @@ c=cons.HIGH;
     if (!jj_3_4()) return false;
     jj_scanpos = xsp;
     if (jj_3_5()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_5()
- {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (!jj_3_18()) return false;
-    jj_scanpos = xsp;
-    if (jj_3_19()) return true;
     return false;
   }
 

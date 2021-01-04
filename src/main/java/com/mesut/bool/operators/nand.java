@@ -8,25 +8,25 @@ import java.util.*;
 public class nand extends func {
 
     public nand(func... array) {
-        this.f = asList(array);
+        this.list = asList(array);
     }
 
     public nand(List<func> list) {
-        this.f = new ArrayList<>(list);
+        this.list = new ArrayList<>(list);
     }
 
     @Override
     protected String toString2() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < f.size(); i++) {
-            func term = f.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            func term = list.get(i);
             if (!term.isCons() && !term.isNand() && !term.isVar()) {
                 sb.append(term.top());
             } else {
                 sb.append(term);
             }
-            if (i < f.size() - 1) {
-                sb.append(nandDel);
+            if (i < list.size() - 1) {
+                sb.append(" nand ");
             }
         }
         return sb.toString();
@@ -39,32 +39,32 @@ public class nand extends func {
 
     @Override
     public func not() {
-        return new and(f);
+        return new and(list);
     }
 
     @Override
-    public cons get(var[] v, cons[] c) {
+    public cons get(variable[] v, cons[] c) {
         return alternate().get(v, c);
     }
 
     @Override
     protected boolean eq2(func other) {
-        return isEq(f, other.f);
+        return isEq(list, other.list);
     }
 
     @Override
     public int total() {
         int total = 0;
-        for (func term : f) {
+        for (func term : list) {
             total += term.total();
         }
         return total;
     }
 
     @Override
-    public List<var> list() {
-        Set<var> result = new HashSet<>();
-        for (func term : f) {
+    public List<variable> list() {
+        Set<variable> result = new HashSet<>();
+        for (func term : list) {
             result.addAll(term.list());
         }
         return asList(result);
@@ -73,7 +73,7 @@ public class nand extends func {
     public func alternate() {
         // System.out.println("altering " + this);
         List<func> list = new ArrayList<>();
-        for (func term : f) {
+        for (func term : this.list) {
             list.add(term.not().alternate());
         }
         return new or(list);

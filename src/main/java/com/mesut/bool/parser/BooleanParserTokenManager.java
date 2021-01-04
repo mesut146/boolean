@@ -3,7 +3,6 @@
 package com.mesut.bool.parser;
 import com.mesut.bool.operators.*;
 import com.mesut.bool.core.*;
-import java.util.*;
 
 /** Token Manager. */
 @SuppressWarnings ("unused")

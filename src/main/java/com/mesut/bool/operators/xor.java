@@ -1,5 +1,6 @@
 package com.mesut.bool.operators;
 
+import com.mesut.bool.Config;
 import com.mesut.bool.core.*;
 
 import java.util.*;
@@ -7,22 +8,22 @@ import java.util.*;
 public class xor extends func {
 
     public xor(func... array) {
-        f = asList(array);
+        list = asList(array);
     }
 
     public xor(List<func> list) {
-        f.addAll(list);
+        this.list.addAll(list);
     }
 
     @Override
     protected boolean eq2(func other) {
-        return isEq(f, other.f);
+        return isEq(list, other.list);
     }
 
     @Override
     public int total() {
         int total = 0;
-        for (func term : f) {
+        for (func term : list) {
             total += term.total();
         }
         return total;
@@ -36,15 +37,15 @@ public class xor extends func {
     @Override
     protected String toString2() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < f.size(); i++) {
-            func term = f.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            func term = list.get(i);
             if (!term.isCons()  && !term.isVar()) {
                 sb.append(term.top());
             } else {
                 sb.append(term);
             }
-            if (i < f.size() - 1) {
-                sb.append(xorDel);
+            if (i < list.size() - 1) {
+                sb.append(Config.xorMode.str());
             }
         }
         return sb.toString();
@@ -53,8 +54,8 @@ public class xor extends func {
     @Override
     public func alternate() {
         // a' and b or a and b'
-        func a = f.get(0);
-        func b = f.size() == 2 ? f.get(1) : new xor(wout(0));
+        func a = list.get(0);
+        func b = list.size() == 2 ? list.get(1) : new xor(wout(0));
 
         // System.out.println("a=" + a + " b=" + b);
 
@@ -69,19 +70,19 @@ public class xor extends func {
 
     @Override
     public func not() {
-        return new xnor(f);
+        return new xnor(list);
         // return alternate().not();
     }
 
     @Override
-    public cons get(var[] v, cons[] c) {
+    public cons get(variable[] v, cons[] c) {
         return alternate().get(v, c);
     }
 
     @Override
-    public List<var> list() {
-        Set<var> result = new HashSet<>();
-        for (func term : f) {
+    public List<variable> list() {
+        Set<variable> result = new HashSet<>();
+        for (func term : list) {
             result.addAll(term.list());
         }
         return asList(result);

@@ -47,7 +47,7 @@ public class cons extends func {
     }
 
     @Override
-    public cons get(var[] v, cons[] c) {
+    public cons get(variable[] v, cons[] c) {
         return this;
     }
 
@@ -56,7 +56,7 @@ public class cons extends func {
     }
 
     @Override
-    public List<var> list() {
-        return new ArrayList<var>();
+    public List<variable> list() {
+        return new ArrayList<variable>();
     }
 }

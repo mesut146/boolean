@@ -5,7 +5,7 @@ import java.util.*;
 public class Karnaugh
 {
     boolean[][] map;//data
-    var[] row, col;
+    variable[] row, col;
     boolean[][] r;//row vars
     boolean[][] c;//col vars
 
@@ -15,8 +15,8 @@ public class Karnaugh
         t.calc();
         System.out.println(t);
         int len = t.vars.size();
-        row = new var[len / 2];
-        col = new var[len - row.length];
+        row = new variable[len / 2];
+        col = new variable[len - row.length];
 
         map = new boolean[(int) Math.pow(2, row.length)][(int) Math.pow(2, col.length)];
         r = new boolean[map.length][row.length];

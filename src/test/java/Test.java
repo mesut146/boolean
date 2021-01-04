@@ -6,7 +6,7 @@ public class Test {
 
     @org.junit.Test
     public void simplify() {
-        func f = func.parse("(a && b) || (a && c) || (b && !c)");
+        func f = func.parse("a+b.c'");
         System.out.println(f);
     }
 
