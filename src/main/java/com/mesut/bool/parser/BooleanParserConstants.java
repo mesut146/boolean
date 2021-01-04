@@ -11,53 +11,53 @@ public interface BooleanParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int ZERO = 5;
+  int ZERO = 1;
   /** RegularExpression Id. */
-  int ONE = 6;
+  int ONE = 2;
   /** RegularExpression Id. */
-  int LPAREN = 7;
+  int LPAREN = 3;
   /** RegularExpression Id. */
-  int RPAREN = 8;
+  int RPAREN = 4;
   /** RegularExpression Id. */
-  int LBRACE = 9;
+  int LBRACE = 5;
   /** RegularExpression Id. */
-  int RBRACE = 10;
+  int RBRACE = 6;
   /** RegularExpression Id. */
-  int LBRACKET = 11;
+  int LBRACKET = 7;
   /** RegularExpression Id. */
-  int RBRACKET = 12;
+  int RBRACKET = 8;
   /** RegularExpression Id. */
-  int SEMICOLON = 13;
+  int SEMICOLON = 9;
   /** RegularExpression Id. */
-  int COLON = 14;
+  int COLON = 10;
   /** RegularExpression Id. */
-  int COMMA = 15;
+  int COMMA = 11;
   /** RegularExpression Id. */
-  int QUOTE = 16;
+  int QUOTE = 12;
   /** RegularExpression Id. */
-  int EQ = 17;
+  int EQ = 13;
   /** RegularExpression Id. */
-  int MINUS = 18;
+  int MINUS = 14;
   /** RegularExpression Id. */
-  int DIV = 19;
+  int DIV = 15;
   /** RegularExpression Id. */
-  int AND = 20;
+  int AND = 16;
   /** RegularExpression Id. */
-  int OR = 21;
+  int OR = 17;
   /** RegularExpression Id. */
-  int XOR = 22;
+  int XOR = 18;
   /** RegularExpression Id. */
-  int NOR = 23;
+  int NOR = 19;
   /** RegularExpression Id. */
-  int NAND = 24;
+  int NAND = 20;
   /** RegularExpression Id. */
-  int XNOR = 25;
+  int XNOR = 21;
   /** RegularExpression Id. */
-  int NOT = 26;
+  int NOT = 22;
   /** RegularExpression Id. */
-  int IDENT = 27;
+  int IDENT = 23;
   /** RegularExpression Id. */
-  int CHAR = 28;
+  int CHAR = 24;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -65,10 +65,6 @@ public interface BooleanParserConstants {
   /** Literal token values. */
   String[] tokenImage = {
     "<EOF>",
-    "\" \"",
-    "\"\\r\"",
-    "\"\\n\"",
-    "\"\\t\"",
     "\"0\"",
     "\"1\"",
     "\"(\"",
@@ -93,6 +89,10 @@ public interface BooleanParserConstants {
     "\"not\"",
     "<IDENT>",
     "<CHAR>",
+    "\" \"",
+    "\"\\r\"",
+    "\"\\n\"",
+    "\"\\t\"",
     "\"~\"",
     "\"!\"",
   };

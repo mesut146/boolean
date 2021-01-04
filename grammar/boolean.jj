@@ -19,11 +19,6 @@ public class BooleanParser
 }
 PARSER_END(BooleanParser)
 
-SKIP :
-{
-    " "  |   "\r"  |  "\n"  |  "\t"
-}
-
 TOKEN:
 {
     <ZERO: "0" >
@@ -73,6 +68,11 @@ TOKEN:
 | <#CHAR: ["a"-"z","A"-"Z"]>
 }
 
+SKIP : {
+    " "  |   "\r"  |  "\n"  |  "\t"
+}
+
+
 func line():
 {
   func f;
@@ -112,7 +112,7 @@ func unary():
   boolean not=false;
 }
 {
-   ["~"{not=true;}] a=element() [ ("!" | "'") {not=true;}]
+   [("~" | "!"){not=true;}] a=element() [ ("!" | "'") {not=true;}]
   {
     if(not){
       return a.not();
