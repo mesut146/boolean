@@ -1,6 +1,7 @@
 import com.mesut.bool.core.Karnaugh;
 import com.mesut.bool.core.TruthTable;
 import com.mesut.bool.core.func;
+import org.junit.Ignore;
 
 public class Test {
 
@@ -39,6 +40,7 @@ public class Test {
     }
 
     @org.junit.Test
+    @Ignore
     public void karnaugh() {
         func f = func.parse("a and (a or b)");
         Karnaugh k = new Karnaugh(f);
