@@ -35,8 +35,8 @@ public class TruthTable {
             // System.out.println(lc);
             in.add(lc);
             List<cons> ls = new ArrayList<>();
-            for (int j = 0; j < f.length; j++) {
-                ls.add(f[j].get(vars.toArray(new variable[0]), lc.toArray(new cons[0])));
+            for (func func : f) {
+                ls.add(func.get(vars.toArray(new variable[0]), lc.toArray(new cons[0])));
             }
             out.add(ls);
         }

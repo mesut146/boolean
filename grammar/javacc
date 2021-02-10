@@ -1,9 +1,0 @@
-#!/bin/bash
-
-dir=$(dirname $0)
-
-grammar="${dir}/boolean.jj"
-out="${dir}/../src/main/java/com/mesut/bool/parser"
-cc="${dir}/javacc-7.0.5.jar"
-
-java -cp $cc javacc -OUTPUT_DIRECTORY=${out} -FORCE_LA_CHECK=true $grammar

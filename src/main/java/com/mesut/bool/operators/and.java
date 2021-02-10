@@ -58,7 +58,7 @@ public class and extends func {
         } else if (list.size() == 1) {
             return list.get(0);
         }
-        if (true) {
+        if (true) {//todo
             return this;
         }
         // a(b+c)=ab+ac

@@ -12,11 +12,9 @@ public class cons extends func {
     public cons(boolean value) {
         this.value = value;
     }
-
     public cons(int value) {
         this.value = (value == 1);
     }
-
     public cons(char chr) {
         this.value = chr == '1';
     }
@@ -24,11 +22,6 @@ public class cons extends func {
     @Override
     protected String toString2() {
         return value ? "1" : "0";
-    }
-
-    @Override
-    public cons simplify() {
-        return this;
     }
 
     @Override
@@ -51,12 +44,12 @@ public class cons extends func {
         return this;
     }
 
-    public boolean getValue(){
+    public boolean getValue() {
         return value;
     }
 
     @Override
     public List<variable> list() {
-        return new ArrayList<variable>();
+        return new ArrayList<>();
     }
 }

@@ -16,24 +16,26 @@
         <delete dir="build"/>
     </target>
 
-    <target name="build" depends="grammar">
+    <target name="compile" depends="grammar">
         <mkdir dir="build/classes"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}" debug="true"/>
     </target>
 
     <target name="grammar">
-        <exec executable="bash">
-            <arg line="./grammar/javacc"/>
+        <property name="out" value="src/main/java/com/mesut/bool/parser"/>
+        <property name="input" value="grammar/boolean.jj"/>
+        <exec executable="java">
+            <arg line="-cp ${javacc} javacc -OUTPUT_DIRECTORY=${out} -FORCE_LA_CHECK=true ${input}"/>
         </exec>
     </target>
 
-    <target name="jar" depends="build">
+    <target name="jar" depends="compile">
         <mkdir dir="${build.dir}"/>
         <jar destfile="${jar.path}" basedir="${classes.dir}">
         </jar>
     </target>
 
-    <target name="all" depends="build,jar">
+    <target name="all" depends="jar">
 
     </target>
 
