@@ -115,7 +115,7 @@ if(not){
       a = cons();
 {if ("" != null) return a;}
     } else if (jj_2_16(3)) {
-      a = var();
+      a = var_();
 {if ("" != null) return a;}
     } else if (jj_2_17(3)) {
       jj_consume_token(LPAREN);
@@ -144,8 +144,7 @@ c=cons.HIGH;
     throw new Error("Missing return statement in function");
 }
 
-  final public variable var() throws ParseException {var v;
-  Token token;
+  final public variable var_() throws ParseException {Token token;
     token = jj_consume_token(IDENT);
 {if ("" != null) return new variable(token.toString());}
     throw new Error("Missing return statement in function");

@@ -126,7 +126,7 @@ func element():
 }
 {
     a=cons(){return a;}
-  | a=var(){return a;}
+  | a=var_(){return a;}
   | "(" a=expr() ")" {return a;}
 }
 
@@ -139,9 +139,8 @@ cons cons():
   { return c; }
 }
 
-variable var():
+variable var_():
 {
-  var v;
   Token token;
 }
 {
