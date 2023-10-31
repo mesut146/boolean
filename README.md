@@ -4,16 +4,16 @@ a java library for boolean algebra that supports infinite variables
 
 # grammar
 
-| operator   | grammar
-| ---------- | ----------------------------------------------------------- |
-| and        | expression = expression ( ```and``` , ```&&```, ```&``` , ```*``` , ```.``` ) expression |
-| or         | expression = expression ( ```or``` , &#124;&#124; , &#124; , ```+``` ) expression|
-| xor        | expression = expression ( ```xor```  , ```^```) expression |
-| nor        | expression = expression ( ```nor``` ) expression  |
-| nand       | expression = expression ( ```nand``` ) expression |
-| xnor       | expression = expression ( ```xnor``` )  expression |
-| not/invert | expression = expression ( ```!``` , ```'``` ) |
-| not/invert | expression = ```~``` expression |
+| operator   | grammar                                                                        |
+|------------|--------------------------------------------------------------------------------|
+| and        | expression = expression ( ```and``` , ```&``` , ```*``` , ```.``` ) expression |
+| or         | expression = expression ( ```or```   , &#124; , ```+``` ) expression           |
+| xor        | expression = expression ( ```xor```  , ```^```) expression                     |
+| nor        | expression = expression ( ```nor``` ) expression                               |
+| nand       | expression = expression ( ```nand``` ) expression                              |
+| xnor       | expression = expression ( ```xnor``` )  expression                             |
+| not/invert | expression = expression ```'```                                                |
+| not/invert | expression = ```~``` expression                                                |
 
 # examples
 **full adder**

@@ -47,7 +47,8 @@ public class not extends func {
 
     @Override
     public func not() {
-        return new not(f);
+        //return new not(f);
+        return f;
     }
 
     @Override

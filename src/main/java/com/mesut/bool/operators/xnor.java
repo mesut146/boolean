@@ -74,6 +74,6 @@ public class xnor extends func {
         for (func term : this.list) {
             list.add(term.alternate());
         }
-        return new xor(list).alternate().not();
+        return new xor(list).alternate().not().alternate();
     }
 }

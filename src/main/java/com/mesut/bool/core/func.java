@@ -1,8 +1,8 @@
 package com.mesut.bool.core;
 
 import com.mesut.bool.operators.*;
-import com.mesut.bool.parser.BooleanParser;
-import com.mesut.bool.parser.ParseException;
+import com.mesut.bool.parser.Lexer;
+import com.mesut.bool.parser.Parser;
 
 import java.io.StringReader;
 import java.util.*;
@@ -146,7 +146,7 @@ public abstract class func {
         if ((l = l1.size()) != l2.size()) {
             return false;
         }
-        boolean b[] = new boolean[l];
+        boolean[] b = new boolean[l];
         boolean u;
         for (int i = 0; i < l; i++) {
             func p = l1.get(i);
@@ -169,14 +169,8 @@ public abstract class func {
         return new ArrayList<func>();
     }
 
-    // with javacc
     public static func parse(String expr) {
-        BooleanParser parser = new BooleanParser(new StringReader(expr));
-        try {
-            return parser.expr();
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        return new Parser(new Lexer(expr)).expr();
     }
 
     // total variable count

@@ -46,10 +46,11 @@ public class TruthTable {
     // add 0's to str so that total is the final length
     public static String fix(String str, int total) {
         int remaining = Math.abs(total - str.length());
+        StringBuilder sb = new StringBuilder(str);
         for (int i = 0; i < remaining; i++) {
-            str = "0" + str;
+            sb.insert(0, "0");
         }
-        return str;
+        return sb.toString();
     }
 
     @Override

@@ -169,7 +169,6 @@ public class or extends func {
         for (func term : list) {
             result.addAll(term.list());
         }
-        System.out.println("or.list=" + result);
         List<variable> list = asList(result);
         sort2(list);
         return list;
