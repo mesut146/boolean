@@ -23,19 +23,16 @@ public class Config {
             else if (this == AMP) {
                 return "&";
             }
-            return " and ";
+            return " And ";
         }
     }
 
     public enum OrMode {
-        PLUS, AMP, BAR, STR;
+        PLUS, BAR, STR;
 
         public String str() {
             if (this == PLUS) {
                 return "+";
-            }
-            else if (this == AMP) {
-                return "&";
             }
             else if (this == BAR) {
                 return "|";

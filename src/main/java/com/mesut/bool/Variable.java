@@ -1,12 +1,9 @@
-package com.mesut.bool.core;
+package com.mesut.bool;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class variable extends func {
+public class Variable extends func  implements Comparable<Variable>{
     String name;
 
-    public variable(String str) {
+    public Variable(String str) {
         this.name = str;
     }
 
@@ -15,17 +12,12 @@ public class variable extends func {
     }
 
     @Override
-    protected String toString2() {
+    public String toString() {
         return name;
     }
 
     @Override
-    public int total() {
-        return 1;
-    }
-
-    @Override
-    public cons get(variable[] v, cons[] c) {
+    public Cons get(Variable[] v, Cons[] c) {
         for (int i = 0; i < v.length; i++) {
             if (v[i].name.equals(name)) {
                 return c[i];
@@ -36,7 +28,7 @@ public class variable extends func {
 
     @Override
     protected boolean eq2(func other) {
-        variable var = (variable) other;
+        Variable var = (Variable) other;
         return name.equals(var.name);// list func may fail
     }
 
@@ -45,14 +37,10 @@ public class variable extends func {
         int hash = 7;
         hash = 31 * hash + name.hashCode();
         return hash;
-
     }
 
     @Override
-    public List<variable> list() {
-        List<variable> list = new ArrayList<>();
-        list.add(this);
-        return list;
-
+    public int compareTo(Variable other) {
+        return name.compareTo(other.name);
     }
 }

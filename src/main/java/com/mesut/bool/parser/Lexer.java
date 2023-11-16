@@ -22,7 +22,7 @@ public class Lexer {
         char c = input.charAt(pos);
         int start = pos++;
         if (Character.isLetter(c)) {
-            while (pos < input.length() && Character.isLetter(c = input.charAt(pos))) {
+            while (pos < input.length() && (Character.isLetter(input.charAt(pos)) || input.charAt(pos) == '_')) {
                 pos++;
             }
             String val = input.substring(start, pos);

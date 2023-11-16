@@ -1,9 +1,6 @@
 package com.mesut.bool.parser;
 
-import com.mesut.bool.core.cons;
-import com.mesut.bool.core.func;
-import com.mesut.bool.core.variable;
-import com.mesut.bool.operators.*;
+import com.mesut.bool.*;
 
 public class Parser {
     Lexer lexer;
@@ -46,20 +43,20 @@ public class Parser {
             if (is(TokenKind.OR)) {
                 consume(TokenKind.OR);
                 func b = expr();
-                a = new or(a, b);
+                a = new Or(a, b);
             } else if (is(TokenKind.XOR)) {
                 consume(TokenKind.XOR);
                 func b = expr();
-                a = new xor(a, b);
+                a = new Xor(a, b);
             }else if (is(TokenKind.NOR)) {
                 consume(TokenKind.NOR);
                 func b = expr();
-                a = new nor(a, b);
+                a = new Nor(a, b);
             }
             else if (is(TokenKind.XNOR)) {
                 consume(TokenKind.XNOR);
                 func b = expr();
-                a = new xnor(a, b);
+                a = new Xnor(a, b);
             } else {
                 break;
             }
@@ -73,11 +70,11 @@ public class Parser {
             if (is(TokenKind.AND)) {
                 consume(TokenKind.AND);
                 func b = term();
-                a = new and(a, b);
+                a = new And(a, b);
             } else if (is(TokenKind.NAND)) {
                 consume(TokenKind.NAND);
                 func b = term();
-                a = new nand(a, b);
+                a = new Nand(a, b);
             } else {
                 break;
             }
@@ -89,12 +86,12 @@ public class Parser {
         if (is(TokenKind.TILDE)){
             consume(TokenKind.TILDE);
             func a = element();
-            return new not(a);
+            return new Not(a);
         }
         func a = element();
         if (is(TokenKind.QUOTE)) {
             consume(TokenKind.QUOTE);
-            return new not(a);
+            return new Not(a);
         }
         return a;
     }
@@ -107,7 +104,7 @@ public class Parser {
             return a;
         } else if (is(TokenKind.IDENT)) {
             Token token = consume(TokenKind.IDENT);
-            return new variable(token.value);
+            return new Variable(token.value);
         } else {
             return cons();
         }
@@ -116,10 +113,10 @@ public class Parser {
     func cons() {
         if (is(TokenKind.ZERO)) {
             consume(TokenKind.ZERO);
-            return cons.LOW;
+            return Cons.LOW;
         } else {
             consume(TokenKind.OR);
-            return cons.HIGH;
+            return Cons.HIGH;
         }
     }
 }

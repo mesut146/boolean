@@ -1,14 +1,12 @@
-package com.mesut.bool.core;
+package com.mesut.bool;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class TruthTable {
-    List<variable> vars;
-    List<List<cons>> in;
-    List<List<cons>> out;
-    func[] f;
+    public List<Variable> vars;
+    public List<List<Cons>> in;
+    public List<List<Cons>> out;
+    public func[] f;
     boolean calculated = false;
 
     public TruthTable(func... f) {
@@ -18,25 +16,34 @@ public class TruthTable {
         vars = new ArrayList<>();
     }
 
+    public static void sortVars(List<Variable> list) {
+        Collections.sort(list, new Comparator<Variable>() {
+            @Override
+            public int compare(Variable v1, Variable v2) {
+                return v1.getName().compareTo(v2.getName());
+            }
+        });
+    }
+
     public void calc() {
-        HashSet<variable> set = new HashSet<>();
+        Set<Variable> set = new HashSet<>();
         for (func term : f) {
-            set.addAll(term.list());
+            term.vars(set);
         }
         vars.addAll(set);
-        func.sort2(vars);
+        sortVars(vars);
 
         int rows = (int) Math.pow(2, vars.size());
         for (int i = 0; i < rows; i++) {
-            List<cons> lc = new ArrayList<>();
+            List<Cons> lc = new ArrayList<>();
             for (char c : fix(Integer.toBinaryString(i), vars.size()).toCharArray()) {
-                lc.add(new cons(c));
+                lc.add(new Cons(c));
             }
             // System.out.println(lc);
             in.add(lc);
-            List<cons> ls = new ArrayList<>();
+            List<Cons> ls = new ArrayList<>();
             for (func func : f) {
-                ls.add(func.get(vars.toArray(new variable[0]), lc.toArray(new cons[0])));
+                ls.add(func.get(vars.toArray(new Variable[0]), lc.toArray(new Cons[0])));
             }
             out.add(ls);
         }
@@ -94,6 +101,14 @@ public class TruthTable {
             if (i < list.size() - 1) {
                 sb.append(" ");
             }
+        }
+        return sb.toString();
+    }
+
+    public String getOutStr() {
+        StringBuilder sb = new StringBuilder();
+        for (List<Cons> cons : out) {
+            sb.append(cons.get(0));
         }
         return sb.toString();
     }

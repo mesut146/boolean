@@ -18,15 +18,15 @@ a java library for boolean algebra that supports infinite variables
 # examples
 **full adder**
 ```java
-func sum = func.parse("(a xor b) xor carry_in");
-func carry_out = func.parse("(carry_in and (a xor b)) or (b and a)");
+func sum = func.parse("(a xor b) xor c");
+func carry_out = func.parse("(c and (a xor b)) or (b and a)");
 System.out.println(new TruthTable(sum, carry_out).toString());
 ```
 *output:*
 ```
-F1=(a xor b) xor carry_in
-F2=(carry_in and (a xor b)) or (b and a)
-a b carry_in | F1 F2
+F1=(a xor b) xor c
+F2=(c and (a xor b)) or (b and a)
+a b c | F1 F2
 ------------
 0 0 0 | 0 0
 0 0 1 | 1 0
@@ -56,9 +56,7 @@ System.out.println(f.alternate());
 
 output:
 
-`a and ((b and ~c) or (~b and c))`
+`a and ((b and c') or (b' and c))`
 
 
-# todo
-- karnaugh map
 

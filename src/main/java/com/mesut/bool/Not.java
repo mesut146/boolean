@@ -1,22 +1,17 @@
-package com.mesut.bool.operators;
+package com.mesut.bool;
 
-import com.mesut.bool.Config;
-import com.mesut.bool.core.cons;
-import com.mesut.bool.core.func;
-import com.mesut.bool.core.variable;
+import java.util.Set;
 
-import java.util.List;
-
-public class not extends func {
+public class Not extends func {
 
     func f;
 
-    public not(func f) {
+    public Not(func f) {
         this.f = f;
     }
 
     @Override
-    protected String toString2() {
+    public String toString() {
         if (Config.notMode == Config.NotMode.BANG) {
             return "!" + f.top();
         }
@@ -52,8 +47,8 @@ public class not extends func {
     }
 
     @Override
-    public cons get(variable[] v, cons[] c) {
-        return (cons) f.get(v, c).not();
+    public Cons get(Variable[] v, Cons[] c) {
+        return (Cons) f.get(v, c).not();
     }
 
     @Override
@@ -62,12 +57,7 @@ public class not extends func {
     }
 
     @Override
-    public int total() {
-        return 0;
-    }
-
-    @Override
-    public List<variable> list() {
-        return null;
+    public void vars(Set<Variable> set) {
+        f.vars(set);
     }
 }
