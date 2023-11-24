@@ -1,4 +1,5 @@
 import com.mesut.bool.Karnaugh;
+import com.mesut.bool.Main;
 import com.mesut.bool.TruthTable;
 import com.mesut.bool.func;
 import org.junit.Assert;
@@ -42,7 +43,7 @@ public class Test {
         Assert.assertEquals("a'.b'", func.parse("a nor b ").alternate().toString());
         Assert.assertEquals("(a'+b).(a+b')", func.parse("a xnor b ").alternate().toString());
 
-        func f = func.parse("a And (b xor c)");
+        func f = func.parse("a and (b xor c)");
         Assert.assertEquals("a.(b.c'+b'.c)", f.alternate().toString());
         Assert.assertEquals("a nand (b^c)", f.not().toString());
         Assert.assertEquals("a'+(b'+c).(b+c')", f.not().alternate().toString());
@@ -75,7 +76,7 @@ public class Test {
     @org.junit.Test
     public void full_adder() {
         func sum = func.parse("(a xor b) xor c");
-        func carry = func.parse("(c And (a xor b)) or (a And b)");
+        func carry = func.parse("(c and (a xor b)) or (a and b)");
         System.out.printf("sum=%s carry=%s\n", sum, carry);
         System.out.println(new TruthTable(sum, carry));
         //System.out.println("tt.sum=" + sum.truthTable());
@@ -102,5 +103,11 @@ public class Test {
         System.out.println(k);
         System.out.println(k.solve().truthTable());
         //System.out.println(func.parse("A.C'+A.B'+B.C.D'").truthTable());
+    }
+
+    @org.junit.Test
+    public void test_main() {
+        Main.main("-sop 0001".split(" "));
+        Main.main("-pos 0111".split(" "));
     }
 }

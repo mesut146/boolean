@@ -285,7 +285,7 @@ public abstract class func {
         for (Variable v : tt.vars) {
             vars[i++] = v.toString();
         }
-        return func.parsePOS(tt.getOutStr(), vars);
+        return func.parseSOP(tt.getOutStr(), vars);
     }
 
     public final func pos() {
