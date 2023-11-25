@@ -109,5 +109,6 @@ public class Test {
     public void test_main() {
         Main.main("-sop 0001".split(" "));
         Main.main("-pos 0111".split(" "));
+        Main.main("-k 0000001011111110".split(" "));
     }
 }
