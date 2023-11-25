@@ -14,11 +14,9 @@ public class Not extends func {
     public String toString() {
         if (Config.notMode == Config.NotMode.BANG) {
             return "!" + f.top();
-        }
-        else if (Config.notMode == Config.NotMode.TILDE) {
+        } else if (Config.notMode == Config.NotMode.TILDE) {
             return "~" + f.top();
-        }
-        else if (Config.notMode == Config.NotMode.QUOTE) {
+        } else if (Config.notMode == Config.NotMode.QUOTE) {
             return f.top() + "'";
         }
         return "not " + f.top();
@@ -52,12 +50,10 @@ public class Not extends func {
     }
 
     @Override
-    protected boolean eq2(func v) {
+    public boolean equals(Object other) {
+        if (other instanceof Not) {
+            return f.equals(((Not) other).f);
+        }
         return false;
-    }
-
-    @Override
-    public void vars(Set<Variable> set) {
-        f.vars(set);
     }
 }

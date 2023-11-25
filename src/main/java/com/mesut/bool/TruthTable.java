@@ -17,12 +17,7 @@ public class TruthTable {
     }
 
     public static void sortVars(List<Variable> list) {
-        Collections.sort(list, new Comparator<Variable>() {
-            @Override
-            public int compare(Variable v1, Variable v2) {
-                return v1.getName().compareTo(v2.getName());
-            }
-        });
+        list.sort(Comparator.comparing(Variable::getName));
     }
 
     public void calc() {
@@ -39,7 +34,6 @@ public class TruthTable {
             for (char c : fix(Integer.toBinaryString(i), vars.size()).toCharArray()) {
                 lc.add(new Cons(c));
             }
-            // System.out.println(lc);
             in.add(lc);
             List<Cons> ls = new ArrayList<>();
             for (func func : f) {

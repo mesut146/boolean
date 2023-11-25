@@ -4,14 +4,16 @@ public class Cons extends func {
     public static final Cons LOW = new Cons(false);
     public static final Cons HIGH = new Cons(true);
     public static final Cons ZERO = LOW, ONE = HIGH;
-    boolean value;
+    public final boolean value;
 
     public Cons(boolean value) {
         this.value = value;
     }
+
     public Cons(int value) {
         this.value = (value == 1);
     }
+
     public Cons(char chr) {
         this.value = chr == '1';
     }
@@ -27,8 +29,11 @@ public class Cons extends func {
     }
 
     @Override
-    protected boolean eq2(func v) {
-        return value == v.asCons().value;
+    public boolean equals(Object other) {
+        if (other instanceof Cons) {
+            return value == ((Cons) other).value;
+        }
+        return false;
     }
 
     @Override

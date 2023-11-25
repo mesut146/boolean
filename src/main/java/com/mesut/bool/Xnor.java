@@ -40,11 +40,6 @@ public class Xnor extends func {
         return alternate().get(v, c);
     }
 
-    @Override
-    protected boolean eq2(func other) {
-        return isEq(list, other.list);
-    }
-
 
     public func alternate() {
         List<func> list = new ArrayList<>();

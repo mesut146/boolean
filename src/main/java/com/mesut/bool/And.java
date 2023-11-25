@@ -70,11 +70,6 @@ public class And extends func{
     }
 
     @Override
-    protected boolean eq2(func v) {
-        return isEq(list, v.list);
-    }
-
-    @Override
     public Cons get(Variable[] v, Cons[] c) {
         for (func term : list) {
             if (!term.get(v, c).getValue()) {

@@ -13,11 +13,6 @@ public class Xor extends func {
     }
 
     @Override
-    protected boolean eq2(func other) {
-        return isEq(list, other.list);
-    }
-
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {

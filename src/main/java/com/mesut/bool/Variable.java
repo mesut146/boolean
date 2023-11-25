@@ -27,9 +27,12 @@ public class Variable extends func  implements Comparable<Variable>{
     }
 
     @Override
-    protected boolean eq2(func other) {
-        Variable var = (Variable) other;
-        return name.equals(var.name);// list func may fail
+    public boolean equals(Object other) {
+        if (other instanceof Variable){
+            Variable v = (Variable) other;
+            return name.equals(v.name);
+        }
+        return false;
     }
 
     @Override

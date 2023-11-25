@@ -129,18 +129,13 @@ public abstract class func {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof func)) {
-            return false;
+        if (!(other instanceof func)) return false;
+        func f = (func) other;
+        if (!list.isEmpty()) {
+            return isEq(list, f.list);
         }
-        return eq2((func) other);
+        return false;
     }
-
-    public final boolean eq(func v) {
-        return super.getClass() == v.getClass() && eq2(v);
-    }
-
-    // internal equals
-    protected abstract boolean eq2(func v);
 
     // compare two list by all elements
     public static boolean isEq(List<func> l1, List<func> l2) {
@@ -154,7 +149,7 @@ public abstract class func {
             func p = l1.get(i);
             u = false;
             for (int j = 0; j < l; j++) {
-                if (!b[j] && p.eq(l2.get(j))) {
+                if (!b[j] && p.equals(l2.get(j))) {
                     b[j] = true;
                     u = true;
                     break;
@@ -165,10 +160,6 @@ public abstract class func {
             }
         }
         return true;
-    }
-
-    protected static List<func> free() {
-        return new ArrayList<func>();
     }
 
     public static func parse(String expr) {
@@ -220,10 +211,14 @@ public abstract class func {
         return new ArrayList<>(res);
     }
 
-    public void vars(Set<Variable> set) {
+    public final void vars(Set<Variable> set) {
         if (isCons()) return;
         if (isVar()) {
             set.add(asVar());
+            return;
+        }
+        if (isNot()){
+            asNot().f.vars(set);
             return;
         }
         if (list.isEmpty()) throw new RuntimeException("vars on empty func");
@@ -240,23 +235,20 @@ public abstract class func {
     }
 
     static void sort(List<func> list) {
-        Collections.sort(list, new Comparator<func>() {
-            @Override
-            public int compare(func o1, func o2) {
-                if (o1 instanceof Variable) {
-                    Variable v1 = (Variable) o1;
-                    if (o2 instanceof Variable) {
-                        Variable v2 = (Variable) o2;
-                        return v1.compareTo(v2);
-                    } else {
-                        return -1;
-                    }
-                }
+        list.sort((o1, o2) -> {
+            if (o1 instanceof Variable) {
+                Variable v1 = (Variable) o1;
                 if (o2 instanceof Variable) {
+                    Variable v2 = (Variable) o2;
+                    return v1.compareTo(v2);
+                } else {
                     return -1;
                 }
-                return 0;
             }
+            if (o2 instanceof Variable) {
+                return -1;
+            }
+            return 0;
         });
     }
 

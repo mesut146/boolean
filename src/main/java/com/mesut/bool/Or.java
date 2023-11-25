@@ -36,7 +36,7 @@ public class Or extends func {
 
     @Override
     public func simplify() {
-        List<func> l = free();
+        List<func> l = new ArrayList<>();
         // a+(b+c)=a+b+c
         // a+1=1,a+0=a
         for (func v : list) {
@@ -68,11 +68,6 @@ public class Or extends func {
         func a = list.get(0);
         func b = list.size() == 2 ? list.get(1) : new Or(wout(0));
         return a.not().and(b.not());
-    }
-
-    @Override
-    protected boolean eq2(func v) {
-        return isEq(list, v.list);
     }
 
     @Override
